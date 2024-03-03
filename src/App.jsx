@@ -1,7 +1,9 @@
+import IndexPage from "./pages/IndexPage"
+
 function App() {
   return (
     <>
-      <div>Hello World!</div>
+      <IndexPage></IndexPage>
     </>
   )
 }
