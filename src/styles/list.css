@@ -1,0 +1,97 @@
+.lists {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.list-container {
+  width: 45%;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+}
+
+.list-header {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.list-items {
+  margin-bottom: 20px;
+}
+
+.pagination {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}
+
+.pagination span {
+  font-size: 16px;
+}
+
+.tech-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  transition: background-color 0.2s;
+}
+
+.tech-item:hover {
+  background-color: #f9f9f9;
+}
+
+.tech-item a {
+  font-size: 16px;
+  color: #0275d8;
+  text-decoration: none;
+  flex-grow: 1;
+}
+
+.tech-item span {
+  margin-left: 10px;
+  flex-grow: 2;
+}
+
+.tech-item button {
+  padding: 5px 10px;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.add-btn {
+  background-color: #5cb85c;
+}
+
+.add-btn:hover {
+  background-color: #4cae4c;
+}
+
+.delete-btn {
+  background-color: #d9534f;
+}
+
+.delete-btn:hover {
+  background-color: #c9302c;
+}

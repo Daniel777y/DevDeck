@@ -3,12 +3,11 @@ import PropTypes from "prop-types";
 
 const SelectedTech = ({ tech, onDeleteTech }) => {
   return (
-    <>
-      <div>
-        {tech.name} | {tech.name} | {tech.description} | 
-        <button onClick={() => onDeleteTech(tech)}>-</button>
-      </div>
-    </>
+    <div className="tech-item">
+      <a href="#">{tech.name}</a>
+      <span>{tech.description}</span>
+      <button className="delete-btn" onClick={() => onDeleteTech(tech)}>-</button>
+    </div>
   );
 };
 

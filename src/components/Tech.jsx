@@ -1,14 +1,15 @@
-import React from "react"
+import React from "react";
 import PropTypes from "prop-types";
+
+import "../styles/list.css";
 
 const Tech = ({ tech, onAddTech }) => {
   return (
-    <>
-      <div>
-        {tech.name} | {tech.url} | {tech.description} | 
-        <button onClick={() => onAddTech(tech)}>+</button>
-      </div>
-    </>
+    <div className="tech-item">
+      <a href="#">{tech.name}</a>
+      <span>{tech.description}</span>
+      <button className="add-btn" onClick={() => onAddTech(tech)}>+</button>
+    </div>
   );
 };
 

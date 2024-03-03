@@ -1,29 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import Tech from "./Tech.jsx"
 
-const TechList = ({ techs, onAddTech }) => {
-  const [curCategory, setCurCategory] = useState(0);
-  const onNextCategory = () => {
-    if (curCategory + 1 < techs.length) {
-      setCurCategory(curCategory + 1);
+import "../styles/list.css";
+
+const TechList = ({ displayTechs, onAddTech }) => {
+  const perPage = 10;
+  const [curPage, setCurPage] = useState(0);
+  const onNextPage = () => {
+    if (curPage + 1 < displayTechs.length / perPage) {
+      setCurPage(curPage + 1);
     }
   };
-  const onPrevCategory = () => {
-    if (curCategory >= 1) {
-      setCurCategory(curCategory - 1);
+  const onPrevPage = () => {
+    if (curPage >= 1) {
+      setCurPage(curPage - 1);
     }
   };
   return (
-    <>
-      <div>
-        <button onClick={onPrevCategory}>{`<`}</button>
-        <span>{techs[curCategory].category}</span>
-        <button onClick={onNextCategory}>{`>`}</button>
+    <div className="list-container">
+      <div className="list-header">Techs</div>
+      <div className="pagination">
+        <button onClick={onPrevPage}>{`<`}</button>
+        <span> Page {curPage + 1} </span>
+        <button onClick={onNextPage}>{`>`}</button>
       </div>
-      <div>
-        {techs[curCategory].list.map(item => 
+      <div className="list-items">
+        {displayTechs.slice(perPage * curPage, Math.min(displayTechs.length, perPage * (curPage + 1))).map(item => 
           <Tech
             key={item.id}
             tech={item}
@@ -31,18 +35,12 @@ const TechList = ({ techs, onAddTech }) => {
           />
         )}
       </div>
-    </>
+    </div>
   );
 };
 
 TechList.propTypes = {
-  techs: PropTypes.arrayOf(
-    PropTypes.shape({
-      category: PropTypes.string.isRequired,
-      list: PropTypes.array.isRequired,
-    })
-  ),
-  selectedTechs: PropTypes.array.isRequired,
+  displayTechs: PropTypes.array.isRequired,
   onAddTech: PropTypes.func.isRequired,
 };
 
