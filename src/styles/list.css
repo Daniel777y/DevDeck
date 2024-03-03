@@ -141,7 +141,7 @@
 .tech-item-description {
   color: #586069;
   flex-grow: 1;
-  margin-right: 5px;
+  padding-right: 10px;
 }
 
 .tech-item-btn {
@@ -193,4 +193,10 @@
 
 .selected-tech-item-btn:hover {
   background-color: #c9302c;
+}
+
+.techs-list-subheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
