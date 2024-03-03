@@ -19,8 +19,17 @@ const IndexPage = () => {
     setSelectedTechs(selectedTechs => [...selectedTechs, e]);
   };
   const onDeleteTech = (e) => {
-    //console.log("Delete tech", e);
     setSelectedTechs(selectedTechs => selectedTechs.filter(item => e.name !== item.name));
+  };
+  const onClear = () => {
+    if (selectedTechs.length === 0) {
+      alert('You did not select anything.');
+      return;
+    }
+    if (!confirm('Are you sure to clear all selected items?')) {
+      return;
+    }
+    setSelectedTechs([]);
   };
   return (
     <div>
@@ -33,6 +42,7 @@ const IndexPage = () => {
         <SelectedTechList
           selectedTechs={selectedTechs}
           onDeleteTech={onDeleteTech}
+          onClear={onClear}
         />
       </div>
     </div>

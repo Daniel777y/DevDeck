@@ -6,7 +6,7 @@ import SelectedTech from "./SelectedTech.jsx"
 import "../styles/list.css";
 import "../styles/pagination.css";
 
-const SelectedTechList = ({ selectedTechs, onDeleteTech }) => {
+const SelectedTechList = ({ selectedTechs, onDeleteTech, onClear }) => {
   const perPage = 5;
   const [curPage, setCurPage] = useState(0);
   const onNextPage = () => {
@@ -31,8 +31,8 @@ const SelectedTechList = ({ selectedTechs, onDeleteTech }) => {
   return (
     <div className="list-container selected-tech-list">
       <div className="list-header">
-        <button className="selected-tech-list-btn clear-btn">Clear</button>
-        <button className="selected-tech-list-btn go-btn">Go</button>
+        <button className="selected-tech-list-btn clear-btn" onClick={onClear}>Clear</button>
+        <button className="selected-tech-list-btn go-btn">Start</button>
       </div>
       <div className="pagination">
         <button className="pagination-btn" onClick={onPrevPage}>&lt;</button>
@@ -51,6 +51,7 @@ const SelectedTechList = ({ selectedTechs, onDeleteTech }) => {
 SelectedTechList.propTypes = {
   selectedTechs: PropTypes.array.isRequired,
   onDeleteTech: PropTypes.func.isRequired,
+  onClear: PropTypes.func.isRequired,
 };
 
 export default SelectedTechList;
