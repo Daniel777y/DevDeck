@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import Tech from "./Tech.jsx"
+import Pagination from "./Pagination.jsx"
 import CreateTechForm from "./CreateTechForm.jsx"
 
 import "../styles/list.css";
@@ -30,11 +31,7 @@ const TechList = ({ displayTechs, onAddTech }) => {
         <span className="list-header-text">Techs</span>
       </div>
       <div className="techs-list-subheader">
-        <div className="pagination">
-          <button className="pagination-btn" onClick={onPrevPage}>&lt;</button>
-          <span className="pagination-text"> Page {curPage + 1} </span>
-          <button className="pagination-btn" onClick={onNextPage}>&gt;</button>
-        </div>
+        <Pagination curPage={curPage} onPrevPage={onPrevPage} onNextPage={onNextPage} />
         <CreateTechForm onCreateTech={onCreateTech} />
       </div>
       <div className="list-items">

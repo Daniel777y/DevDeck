@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import SelectedTech from "./SelectedTech.jsx"
+import Pagination from "./Pagination.jsx"
 
 import "../styles/list.css";
 import "../styles/pagination.css";
@@ -34,11 +35,7 @@ const SelectedTechList = ({ selectedTechs, onDeleteTech, onClear }) => {
         <button className="selected-tech-list-btn clear-btn" onClick={onClear}>Clear</button>
         <button className="selected-tech-list-btn go-btn">Start</button>
       </div>
-      <div className="pagination">
-        <button className="pagination-btn" onClick={onPrevPage}>&lt;</button>
-        <span className="pagination-text"> Page {curPage + 1} </span>
-        <button className="pagination-btn" onClick={onNextPage}>&gt;</button>
-      </div>
+      <Pagination curPage={curPage} onPrevPage={onPrevPage} onNextPage={onNextPage} />
       <div className="list-items">
         {selectedTechs.slice(perPage * curPage, Math.min(selectedTechs.length, perPage * (curPage + 1))).map(item =>
           <SelectedTech key={item.id} tech={item} onDeleteTech={onDeleteTech} />
