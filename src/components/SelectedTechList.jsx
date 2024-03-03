@@ -3,8 +3,11 @@ import PropTypes from "prop-types";
 
 import SelectedTech from "./SelectedTech.jsx"
 
+import "../styles/list.css";
+import "../styles/pagination.css";
+
 const SelectedTechList = ({ selectedTechs, onDeleteTech }) => {
-  const perPage = 10;
+  const perPage = 5;
   const [curPage, setCurPage] = useState(0);
   const onNextPage = () => {
     if (curPage + 1 < selectedTechs.length / perPage) {
@@ -26,12 +29,15 @@ const SelectedTechList = ({ selectedTechs, onDeleteTech }) => {
     }
   };
   return (
-    <div className="list-container">
-      <div className="list-header">Selected Techs</div>
+    <div className="list-container selected-tech-list">
+      <div className="list-header">
+        <button className="selected-tech-list-btn clear-btn">Clear</button>
+        <button className="selected-tech-list-btn go-btn">Go</button>
+      </div>
       <div className="pagination">
-        <button onClick={onPrevPage}>{`<`}</button>
-        <span> Page {curPage + 1} </span>
-        <button onClick={onNextPage}>{`>`}</button>
+        <button className="pagination-btn" onClick={onPrevPage}>&lt;</button>
+        <span className="pagination-text"> Page {curPage + 1} </span>
+        <button className="pagination-btn" onClick={onNextPage}>&gt;</button>
       </div>
       <div className="list-items">
         {selectedTechs.slice(perPage * curPage, Math.min(selectedTechs.length, perPage * (curPage + 1))).map(item =>

@@ -5,45 +5,9 @@ import TechList from "../components/TechList.jsx"
 import SelectedTechList from "../components/SelectedTechList.jsx"
 import Header from "../components/Header.jsx"
 
+import techs from "../models/techs";
+
 const IndexPage = () => {
-  const techs = [
-    {
-      id: 0,
-      name: "react",
-      url: "react-url",
-      description: "react-description",
-      tags: ["frontend"],
-    },
-    {
-      id: 1,
-      name: "vue",
-      url: "vue-url",
-      description: "vue-description",
-      tags: ["frontend"],
-    },
-    {
-      id: 2,
-      name: "php",
-      url: "php-url",
-      remark: "php-remark",
-      description: "php-description",
-      tags: ["backend"],
-    },
-    {
-      id: 3,
-      name: "django",
-      url: "django-url",
-      description: "django-description",
-      tags: ["backend"],
-    },
-    {
-      id: 4,
-      name: "mysql",
-      url: "mysql-url",
-      description: "mysql-description",
-      tags: ["database"],
-    }
-  ];
   const [selectedTechs, setSelectedTechs] = useState([]);
   const [displayTechs, setDisplayTechs] = useState(techs);
   const onAddTech = (e) => {

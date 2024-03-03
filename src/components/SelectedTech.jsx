@@ -3,10 +3,9 @@ import PropTypes from "prop-types";
 
 const SelectedTech = ({ tech, onDeleteTech }) => {
   return (
-    <div className="tech-item">
-      <a href="#">{tech.name}</a>
-      <span>{tech.description}</span>
-      <button className="delete-btn" onClick={() => onDeleteTech(tech)}>-</button>
+    <div className="selected-tech-item">
+      <a className="selected-tech-item-a" href={tech.url} target="_blank" rel="noopener noreferrer">{tech.name}</a>
+      <button className="selected-tech-item-btn" onClick={() => onDeleteTech(tech)}>-</button>
     </div>
   );
 };
