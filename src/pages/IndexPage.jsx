@@ -13,6 +13,9 @@ import { validateUrl } from "../utils/validateUrl.js";
 
 const DEV_MODE = true;
 
+// displayTechs: techs that display in the tech list
+// selectedTechs: techs that are selected
+
 // onAdd: create a new tech from the input form
 // onSelect: add an item to the selected list
 // onRemove: remove an item from the selected list
@@ -41,39 +44,64 @@ const IndexPage = () => {
     const name = e.target.techName.value;
     const url = e.target.techUrl.value;
     const description = e.target.techDescription.value;
+    console.log("add", name, url, description);
     if (!validateUrl(url)) {
-      alert('Please enter correct URL');
+      alert('Please enter correct URL!');
       return;
     }
-    console.log(name, url, description);
-  };
-  const onSelect = (tech) => {
-    //console.log("Add tech", e);
-    if (selectedTechs.includes(tech)) {
-      alert('You have already add it.');
+    if (displayTechs.some(item => item.name.toLowerCase() == name.toLowerCase())) {
+      alert(`${name} already exists!`);
       return;
     }
-    console.log("select", tech);
-    const newSelectedTechs = [...selectedTechs, tech];
-    if (!DEV_MODE) {
+    const newTech = {
+      id: displayTechs.length,
+      name,
+      url,
+      description,
+    };
+    if (DEV_MODE) {
+      setDisplayTechs([...displayTechs, newTech]);
+    } else {
       // if not in dev mode, update database
       const update = async () => {
-        await selectedTechManager.selectTech(tech);
+        await techManager.addTech(newTech);
+        await setDisplayTechs([...displayTechs, newTech]);
       };
       update();
     }
-    setSelectedTechs(newSelectedTechs);
+    alert(`${name} is created!`);
+  };
+  const onSelect = (tech) => {
+    console.log("select", tech);
+    if (selectedTechs.some(item => tech.name === item.name)) {
+      alert('You have already add it.');
+      return;
+    }
+    const newSelectedTechs = [...selectedTechs, tech];
+    if (DEV_MODE) {
+      setSelectedTechs(newSelectedTechs);
+    } else {
+      // if not in dev mode, update database
+      const update = async () => {
+        await selectedTechManager.selectTech(tech);
+        await setSelectedTechs(newSelectedTechs);
+      };
+      update();
+    }
   };
   const onRemove = (tech) => {
     console.log("remove", tech);
     const newSelectedTechs = selectedTechs.filter(item => tech.name !== item.name);
-    if (!DEV_MODE) {
+    if (DEV_MODE) {
+      setSelectedTechs(newSelectedTechs);
+    } else {
+      // if not in dev mode, update database
       const update = async () => {
         await selectedTechManager.removeTech(tech);
+        await setSelectedTechs(newSelectedTechs);
       };
       update();
     }
-    setSelectedTechs(newSelectedTechs);
   };
   const onClear = () => {
     if (selectedTechs.length === 0) {
@@ -83,7 +111,17 @@ const IndexPage = () => {
     if (!confirm('Are you sure to clear all selected items?')) {
       return;
     }
-    setSelectedTechs([]);
+    if (DEV_MODE) {
+      setSelectedTechs([]);
+    } else {
+      // if not in dev mode, update database
+      // delete selected techs one by one
+      const update = async () => {
+        await selectedTechManager.clearTechs(selectedTechs);
+        await setSelectedTechs([]);
+      };
+      update();
+    }
   };
   const onStart = () => {
     if (selectedTechs.length === 0) {
@@ -93,7 +131,16 @@ const IndexPage = () => {
     if (!confirm('Are you sure start your project with those techs you selected?')) {
       return;
     }
-    setSelectedTechs([]);
+    if (DEV_MODE) {
+      setSelectedTechs([]);
+    } else {
+      const update = async () => {
+        await selectedTechManager.clearTechs(selectedTechs);
+        await setSelectedTechs([]);
+      };
+      update();
+      setSelectedTechs([]);
+    }
   };
   return (
     <div>

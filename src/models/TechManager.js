@@ -2,14 +2,12 @@ import { myFirebase } from "./MyFirebase.js";
 
 const TechManager = () => {
   return {
-    getAll: () => {
-      return myFirebase.getAllTechs();
+    getAll: async () => {
+      const techs = await myFirebase.getAllTechs();
+      return techs;
     },
-    addTech: ({name = "", url = "", description = "" } = {}) => {
-      if (!name || !description || !url || name.length === 0 || url.length === 0 || description.length === 0) {
-        alert('You did not input anything!');
-        return;
-      }
+    addTech: async ({ id, name, url, description }) => {
+      await myFirebase.addTech({ id, name, url, description });
     },
   };
 };

@@ -2,14 +2,20 @@ import { myFirebase } from "./MyFirebase.js";
 
 const SelectedTechManager = () => {
   return {
-    getAll: () => {
-      return myFirebase.getAllSelectedTechs();
+    getAll: async () => {
+      const selectedTechs = await myFirebase.getAllSelectedTechs();
+      return selectedTechs;
     },
-    selectTech: ({ id, name, url, description }) => {
-      myFirebase.selectTech({ id, name, url, description });
+    selectTech: async (tech) => {
+      await myFirebase.selectTech(tech);
     },
-    removeTech: ({ id, name, url, description }) => {
-      myFirebase.removeTech({ id, name, url, description });
+    removeTech: async (tech) => {
+      await myFirebase.removeTech(tech);
+    },
+    clearTechs: async (selectedTechs) => {
+      await selectedTechs.forEach(async (tech) => {
+        await myFirebase.removeTech(tech);
+      });
     },
   };
 };
