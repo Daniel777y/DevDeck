@@ -5,11 +5,20 @@ import TechList from "../components/TechList.jsx"
 import SelectedTechList from "../components/SelectedTechList.jsx"
 import Header from "../components/Header.jsx"
 
-import techs from "../models/techs";
+import { techManager } from "../models/TechManager.js";
+
+// import techs from "../models/techs";
 
 const IndexPage = () => {
   const [selectedTechs, setSelectedTechs] = useState([]);
-  const [displayTechs, setDisplayTechs] = useState(techs);
+  const [displayTechs, setDisplayTechs] = useState([]);
+  useEffect(() => {
+    const initTechs = async () => {
+      const techs = await techManager.getAllTechs();
+      setDisplayTechs(techs);
+    };
+    initTechs();
+  }, []);
   const onAddTech = (e) => {
     //console.log("Add tech", e);
     if (selectedTechs.includes(e)) {
