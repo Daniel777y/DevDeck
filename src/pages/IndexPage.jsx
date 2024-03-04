@@ -6,18 +6,23 @@ import SelectedTechList from "../components/SelectedTechList.jsx"
 import Header from "../components/Header.jsx"
 
 import { techManager } from "../models/TechManager.js";
+import sampleTechs from "../models/techs.js";
 
-// import techs from "../models/techs";
+const DEV_MODE = true;
 
 const IndexPage = () => {
   const [selectedTechs, setSelectedTechs] = useState([]);
   const [displayTechs, setDisplayTechs] = useState([]);
   useEffect(() => {
-    const initTechs = async () => {
-      const techs = await techManager.getAllTechs();
-      setDisplayTechs(techs);
-    };
-    initTechs();
+    if (DEV_MODE) {
+      setDisplayTechs(sampleTechs);
+    } else {
+      const initTechs = async () => {
+        const techs = await techManager.getAllTechs();
+        setDisplayTechs(techs);
+      };
+      initTechs();
+    }
   }, []);
   const onAddTech = (e) => {
     //console.log("Add tech", e);
