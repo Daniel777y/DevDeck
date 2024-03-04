@@ -18,12 +18,22 @@ const MyFirebase = () => {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  const me = {};
-  me.getAllTechs = async () => {
-    const techsRef = collection(db, "Techs");
-    return (await getDocs(techsRef)).docs.map(item => item.data());
+  return {
+    getAllTechs: async () => {
+      const techsRef = collection(db, "Techs");
+      return (await getDocs(techsRef)).docs.map(item => item.data());
+    },
+    getAllSelectedTechs: async () => {
+      const selectedTechsRef = collection(db, "SelectedTechs");
+      return (await getDocs(selectedTechsRef)).docs.map(item => item.data());
+    },
+    addTech: async ({ id, name, url, description }) => {
+    },
+    selectTech: async ({ id, name, url, description }) => {
+    },
+    removeTech: async ({ id, name, url, description }) => {
+    },
   };
-  return me;
 };
 
 export const myFirebase = MyFirebase();

@@ -7,7 +7,7 @@ import Pagination from "./Pagination.jsx"
 import "../styles/list.css";
 import "../styles/pagination.css";
 
-const SelectedTechList = ({ selectedTechs, onDeleteTech, onClear }) => {
+const SelectedTechList = ({ selectedTechs, onRemove, onClear, onStart }) => {
   const perPage = 5;
   const [curPage, setCurPage] = useState(0);
   const onNextPage = () => {
@@ -33,12 +33,12 @@ const SelectedTechList = ({ selectedTechs, onDeleteTech, onClear }) => {
     <div className="list-container selected-tech-list">
       <div className="list-header">
         <button className="selected-tech-list-btn clear-btn" onClick={onClear}>Clear</button>
-        <button className="selected-tech-list-btn go-btn">Start</button>
+        <button className="selected-tech-list-btn start-btn" onClick={onStart}>Start</button>
       </div>
       <Pagination curPage={curPage} onPrevPage={onPrevPage} onNextPage={onNextPage} />
       <div className="list-items">
         {selectedTechs.slice(perPage * curPage, Math.min(selectedTechs.length, perPage * (curPage + 1))).map(item =>
-          <SelectedTech key={item.id} tech={item} onDeleteTech={onDeleteTech} />
+          <SelectedTech key={item.id} tech={item} onRemove={onRemove} />
         )}
       </div>
     </div>
@@ -47,8 +47,9 @@ const SelectedTechList = ({ selectedTechs, onDeleteTech, onClear }) => {
 
 SelectedTechList.propTypes = {
   selectedTechs: PropTypes.array.isRequired,
-  onDeleteTech: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
   onClear: PropTypes.func.isRequired,
+  onStart: PropTypes.func.isRequired,
 };
 
 export default SelectedTechList;

@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 
 import "../styles/createTechForm.css";
 
-const CreateTechForm = ({ onCreateTech }) => {
+const CreateTechForm = ({ onAdd }) => {
   return (
-    <form className="create-tech-form" onSubmit={onCreateTech}>
+    <form className="create-tech-form" onSubmit={onAdd}>
       <input
-        className="create-tech-from-input"
+        className="create-tech-form-input"
         type="text"
         name="techName"
         placeholder="Name"
@@ -16,7 +16,16 @@ const CreateTechForm = ({ onCreateTech }) => {
         required
       />
       <input
-        className="create-tech-from-input"
+        className="create-tech-form-input"
+        type="text"
+        name="techUrl"
+        placeholder="URL"
+        autoComplete="off"
+        maxLength="100"
+        required
+      />
+      <input
+        className="create-tech-form-input"
         type="text"
         name="techDescription"
         placeholder="Description"
@@ -30,7 +39,7 @@ const CreateTechForm = ({ onCreateTech }) => {
 };
 
 CreateTechForm.propTypes = {
-  onCreateTech: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
 };
 
 export default CreateTechForm;

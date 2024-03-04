@@ -8,7 +8,7 @@ import CreateTechForm from "./CreateTechForm.jsx"
 import "../styles/list.css";
 import "../styles/pagination.css";
 
-const TechList = ({ displayTechs, onAddTech }) => {
+const TechList = ({ displayTechs, onSelect, onAdd }) => {
   const perPage = 5;
   const [curPage, setCurPage] = useState(0);
   const onNextPage = () => {
@@ -21,10 +21,6 @@ const TechList = ({ displayTechs, onAddTech }) => {
       setCurPage(curPage - 1);
     }
   };
-  const onCreateTech = (e) => {
-    e.preventDefault();
-    console.log(e);
-  };
   return (
     <div className="list-container techs-list">
       <div className="list-header">
@@ -32,14 +28,14 @@ const TechList = ({ displayTechs, onAddTech }) => {
       </div>
       <div className="techs-list-subheader">
         <Pagination curPage={curPage} onPrevPage={onPrevPage} onNextPage={onNextPage} />
-        <CreateTechForm onCreateTech={onCreateTech} />
+        <CreateTechForm onAdd={onAdd} />
       </div>
       <div className="list-items">
         {displayTechs.slice(perPage * curPage, Math.min(displayTechs.length, perPage * (curPage + 1))).map(item => 
           <Tech
             key={item.id}
             tech={item}
-            onAddTech={onAddTech}
+            onSelect={onSelect}
           />
         )}
       </div>
@@ -49,7 +45,8 @@ const TechList = ({ displayTechs, onAddTech }) => {
 
 TechList.propTypes = {
   displayTechs: PropTypes.array.isRequired,
-  onAddTech: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired,
 };
 
 export default TechList;

@@ -2,7 +2,7 @@ import { myFirebase } from "./MyFirebase.js";
 
 const TechManager = () => {
   return {
-    getAllTechs: () => {
+    getAll: () => {
       return myFirebase.getAllTechs();
     },
     addTech: ({name = "", url = "", description = "" } = {}) => {
@@ -10,8 +10,6 @@ const TechManager = () => {
         alert('You did not input anything!');
         return;
       }
-    },
-    createTech: ({ name, url, description, tags }) => {
     },
   };
 };
