@@ -36,7 +36,6 @@ const IndexPage = () => {
       init();
     }
   }, []);
-  useEffect(() => {}, []);
   const onAdd = (e) => {
     e.preventDefault();
     const name = e.target.techName.value;
@@ -48,16 +47,33 @@ const IndexPage = () => {
     }
     console.log(name, url, description);
   };
-  const onSelect = (e) => {
+  const onSelect = (tech) => {
     //console.log("Add tech", e);
-    if (selectedTechs.includes(e)) {
+    if (selectedTechs.includes(tech)) {
       alert('You have already add it.');
       return;
     }
-    setSelectedTechs(selectedTechs => [...selectedTechs, e]);
+    console.log("select", tech);
+    const newSelectedTechs = [...selectedTechs, tech];
+    if (!DEV_MODE) {
+      // if not in dev mode, update database
+      const update = async () => {
+        await selectedTechManager.selectTech(tech);
+      };
+      update();
+    }
+    setSelectedTechs(newSelectedTechs);
   };
-  const onRemove = (e) => {
-    setSelectedTechs(selectedTechs => selectedTechs.filter(item => e.name !== item.name));
+  const onRemove = (tech) => {
+    console.log("remove", tech);
+    const newSelectedTechs = selectedTechs.filter(item => tech.name !== item.name);
+    if (!DEV_MODE) {
+      const update = async () => {
+        await selectedTechManager.removeTech(tech);
+      };
+      update();
+    }
+    setSelectedTechs(newSelectedTechs);
   };
   const onClear = () => {
     if (selectedTechs.length === 0) {

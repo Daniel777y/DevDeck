@@ -5,11 +5,11 @@ const SelectedTechManager = () => {
     getAll: () => {
       return myFirebase.getAllSelectedTechs();
     },
-    selectedTech: ({ id, name, url, description }) => {
-      myFirebase.addSelectedTech({ id, name, url, description });
+    selectTech: ({ id, name, url, description }) => {
+      myFirebase.selectTech({ id, name, url, description });
     },
     removeTech: ({ id, name, url, description }) => {
-      myFirebase.deleteSelectedTech({ id, name, url, description });
+      myFirebase.removeTech({ id, name, url, description });
     },
   };
 };
