@@ -33,7 +33,7 @@ const MyFirebase = () => {
     selectTech: async ({ id, name, url, description }) => {
       await setDoc(doc(db, "SelectedTechs", name), { id, name, url, description });
     },
-    removeTech: async ({ id, name, url, description }) => {
+    removeTech: async ({ name }) => {
       await deleteDoc(doc(db, "SelectedTechs", name));
     },
   };
