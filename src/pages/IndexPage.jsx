@@ -142,6 +142,9 @@ const IndexPage = () => {
       setSelectedTechs([]);
     }
   };
+  const onUpdateDescription = (newDescription) => {
+    console.log("update description", newDescription);
+  };
   return (
     <div>
       <Header />
@@ -150,6 +153,7 @@ const IndexPage = () => {
           displayTechs={displayTechs}
           onSelect={onSelect}
           onAdd={onAdd}
+          onUpdateDescription={onUpdateDescription}
         />
         <SelectedTechList
           selectedTechs={selectedTechs}
