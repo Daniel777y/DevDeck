@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import "../styles/list.css";
 
-const Tech = ({ tech, onSelect, onUpdateDescription }) => {
+const Tech = ({ tech, onSelect, onUpdate }) => {
   const [isEditing, setIsEditing] = useState(false);
   const onClickDescriptionText = () => {
     setIsEditing(true);
@@ -11,7 +11,10 @@ const Tech = ({ tech, onSelect, onUpdateDescription }) => {
   const onInputBlur = (e) => {
     const newDescription = e.target.value;
     if (newDescription || newDescription.length !== 0) {
-      onUpdateDescription(newDescription);
+      onUpdate({
+        ...tech, 
+        description: newDescription,
+      });
     }
     setIsEditing(false);
   };
@@ -46,7 +49,7 @@ Tech.propTypes = {
     description: PropTypes.string.isRequired,
   }),
   onSelect: PropTypes.func.isRequired,
-  onUpdateDescription: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
 
 export default Tech;

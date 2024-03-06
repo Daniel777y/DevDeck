@@ -11,7 +11,7 @@ import sampleTechs from "../models/techs.js";
 
 import { validateUrl } from "../utils/validateUrl.js";
 
-const DEV_MODE = true;
+const DEV_MODE = false;
 
 // displayTechs: techs that display in the tech list
 // selectedTechs: techs that are selected
@@ -21,6 +21,7 @@ const DEV_MODE = true;
 // onRemove: remove an item from the selected list
 // onClear: clear all the items in the selected list
 // onStart: confirm the selection
+// onUpdate: update the tech info
 
 const IndexPage = () => {
   const [selectedTechs, setSelectedTechs] = useState([]);
@@ -142,8 +143,27 @@ const IndexPage = () => {
       setSelectedTechs([]);
     }
   };
-  const onUpdateDescription = (newDescription) => {
-    console.log("update description", newDescription);
+  const onUpdate = (newTech) => {
+    console.log("update description", newTech);
+    const newDisplayTechs = displayTechs.map(item => {
+      if (item.name === newTech.name) {
+        return {
+          ...item,
+          description: newTech.description,
+        }
+      }
+      return item;
+    });
+    if (DEV_MODE) {
+      setDisplayTechs(newDisplayTechs);
+    } else {
+      const update = async () => {
+        await techManager.updateTech(newTech);
+        await setDisplayTechs(newDisplayTechs);
+      };
+      update();
+    }
+    alert(`${newTech.name} is updated successfully!`);
   };
   return (
     <div>
@@ -153,7 +173,7 @@ const IndexPage = () => {
           displayTechs={displayTechs}
           onSelect={onSelect}
           onAdd={onAdd}
-          onUpdateDescription={onUpdateDescription}
+          onUpdate={onUpdate}
         />
         <SelectedTechList
           selectedTechs={selectedTechs}

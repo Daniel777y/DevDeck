@@ -8,7 +8,7 @@ import CreateTechForm from "./CreateTechForm.jsx"
 import "../styles/list.css";
 import "../styles/pagination.css";
 
-const TechList = ({ displayTechs, onSelect, onAdd, onUpdateDescription }) => {
+const TechList = ({ displayTechs, onSelect, onAdd, onUpdate }) => {
   const perPage = 5;
   const [curPage, setCurPage] = useState(0);
   const onNextPage = () => {
@@ -36,7 +36,7 @@ const TechList = ({ displayTechs, onSelect, onAdd, onUpdateDescription }) => {
             key={item.id}
             tech={item}
             onSelect={onSelect}
-            onUpdateDescription={onUpdateDescription}
+            onUpdate={onUpdate}
           />
         )}
       </div>
@@ -48,7 +48,7 @@ TechList.propTypes = {
   displayTechs: PropTypes.array.isRequired,
   onAdd: PropTypes.func.isRequired,
   onSelect: PropTypes.func.isRequired,
-  onUpdateDescription: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
 
 export default TechList;

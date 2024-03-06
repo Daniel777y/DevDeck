@@ -1,6 +1,8 @@
+import { formatStrToDataId } from "../utils/formatStrToDataId.js";
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { collection, doc, setDoc, deleteDoc, getDocs, getFirestore } from "firebase/firestore";
+import { collection, doc, setDoc, deleteDoc, updateDoc, getDocs, getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 const MyFirebase = () => {
   // https://firebase.google.com/docs/web/setup#available-libraries
@@ -28,13 +30,25 @@ const MyFirebase = () => {
       return (await getDocs(selectedTechsRef)).docs.map(item => item.data());
     },
     addTech: async ({ id, name, url, description }) => {
-      await setDoc(doc(db, "Techs", name), { id, name, url, description });
+      const dataId = formatStrToDataId(name);
+      await setDoc(doc(db, "Techs", dataId), { id, name, url, description });
     },
     selectTech: async ({ id, name, url, description }) => {
-      await setDoc(doc(db, "SelectedTechs", name), { id, name, url, description });
+      const dataId = formatStrToDataId(name);
+      await setDoc(doc(db, "SelectedTechs", dataId), { id, name, url, description });
     },
     removeTech: async ({ name }) => {
-      await deleteDoc(doc(db, "SelectedTechs", name));
+      const dataId = formatStrToDataId(name);
+      await deleteDoc(doc(db, "SelectedTechs", dataId));
+    },
+    updateTech: async ({ id, name, url, description }) => {
+      const dataId = formatStrToDataId(name);
+      await updateDoc(doc(db, "Techs", dataId), {
+        id,
+        name,
+        url,
+        description
+      });
     },
   };
 };

@@ -6,8 +6,11 @@ const TechManager = () => {
       const techs = await myFirebase.getAllTechs();
       return techs;
     },
-    addTech: async ({ id, name, url, description }) => {
-      await myFirebase.addTech({ id, name, url, description });
+    addTech: async (tech) => {
+      await myFirebase.addTech(tech);
+    },
+    updateTech: async (tech) => {
+      await myFirebase.updateTech(tech);
     },
   };
 };
