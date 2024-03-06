@@ -43,12 +43,7 @@ const MyFirebase = () => {
     },
     updateTech: async ({ id, name, url, description }) => {
       const dataId = formatStrToDataId(name);
-      await updateDoc(doc(db, "Techs", dataId), {
-        id,
-        name,
-        url,
-        description
-      });
+      await updateDoc(doc(db, "Techs", dataId), { id, name, url, description });
     },
   };
 };

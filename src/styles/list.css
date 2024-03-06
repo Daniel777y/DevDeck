@@ -144,6 +144,11 @@
   padding-right: 10px;
 }
 
+.tech-item-description-input {
+  flex-grow: 1;
+  padding-right: 10px;
+}
+
 .tech-item-btn {
   background-color: #28a745;
   color: white;

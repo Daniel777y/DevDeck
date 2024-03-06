@@ -11,7 +11,7 @@ import sampleTechs from "../models/techs.js";
 
 import { validateUrl } from "../utils/validateUrl.js";
 
-const DEV_MODE = false;
+const DEV_MODE = true;
 
 // displayTechs: techs that display in the tech list
 // selectedTechs: techs that are selected
@@ -70,6 +70,7 @@ const IndexPage = () => {
       };
       update();
     }
+    e.target.reset();
     alert(`${name} is created!`);
   };
   const onSelect = (tech) => {
